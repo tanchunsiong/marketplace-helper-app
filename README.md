@@ -246,3 +246,7 @@ npm run security:audit # npm audit for production dependencies (run manually)
   database file permissions (`0600`) and keeps the database outside the public web root.
 - Serve this service only over HTTPS (TLS 1.2 or higher) before running OAuth.
 - Rotate the API key if exposed.
+
+## License
+
+MIT. See [LICENSE](LICENSE).
