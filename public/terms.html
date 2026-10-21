@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Terms of Use | {{APP_NAME}}</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <header class="shell nav">
+      <a class="brand" href="/"><span class="mark"><span>{{APP_INITIALS}}</span></span><span class="brand-copy"><strong>{{APP_NAME}}</strong></span></a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="/privacy">Privacy</a>
+        <a href="/security">Security</a>
+        <a href="/support">Support</a>
+      </nav>
+    </header>
+    <main class="shell content">
+      <h1>Terms of Use</h1>
+      <p>Effective date: {{POLICY_EFFECTIVE_DATE}}.</p>
+      <h2>Use of the Service</h2>
+      <p>
+        {{APP_NAME}} is intended for authorized Zoom account admins using compatible MCP or REST clients to
+        manage Zoom Marketplace app configurations for accounts they control. You are responsible for confirming app
+        IDs, manifests, approval actions, and deletion intent before requesting a change.
+      </p>
+      <h2>Administrator Authorization</h2>
+      <p>
+        By connecting a Zoom account, you authorize the app to use granted Marketplace scopes to perform requested app-management operations.
+      </p>
+      <h2>Restrictions</h2>
+      <p>
+        Do not use the app to access accounts, apps, logs, or configurations that you are not authorized to manage. Do not attempt to bypass Zoom Marketplace policies or review requirements.
+      </p>
+      <h2>Availability</h2>
+      <p>
+        The service is provided on an as-is basis without a service-level guarantee. Zoom Marketplace APIs, scopes,
+        supported app types, and manifest validation behavior may change over time.
+      </p>
+    </main>
+    <footer class="shell footer">
+      <span>© {{YEAR}} {{APP_NAME}}</span>
+      <span class="footer-links"><a href="/">Home</a><a href="/privacy">Privacy</a><a href="/support">Support</a></span>
+    </footer>
+  </body>
+</html>

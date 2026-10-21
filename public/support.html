@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Support | {{APP_NAME}}</title>
+    <link rel="stylesheet" href="/styles.css">
+    <script src="/support.js" defer></script>
+    </head>
+  <body>
+    <header class="shell nav">
+      <a class="brand" href="/"><span class="mark"><span>{{APP_INITIALS}}</span></span><span class="brand-copy"><strong>{{APP_NAME}}</strong></span></a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
+        <a href="/security">Security</a>
+      </nav>
+    </header>
+    <main class="shell content">
+      <h1>Support</h1>
+      <p>
+        {{SUPPORT_HOURS}} <a href="#support-form">Open the support request form below</a>.
+      </p>
+      <form class="support-form" id="support-form" action="/api/support/requests" method="post">
+        <div class="form-field">
+          <label for="support-name">Name</label>
+          <input id="support-name" name="name" type="text" minlength="2" maxlength="100" autocomplete="name" required>
+        </div>
+        <div class="form-field">
+          <label for="support-email">Email</label>
+          <input id="support-email" name="email" type="email" maxlength="254" autocomplete="email" required>
+        </div>
+        <div class="form-field">
+          <label for="support-issue">Issue</label>
+          <textarea id="support-issue" name="issue" minlength="20" maxlength="4000" rows="8" required></textarea>
+          <small>Include the operation, error message, and affected Marketplace feature. Do not include credentials or secrets.</small>
+        </div>
+        <div class="form-trap" aria-hidden="true">
+          <label for="support-website">Website</label>
+          <input id="support-website" name="website" type="text" tabindex="-1" autocomplete="off">
+        </div>
+        <input id="support-started-at" name="started_at" type="hidden">
+        <button class="button primary" type="submit">Submit support request</button>
+        <p class="form-status" id="support-status" role="status" aria-live="polite"></p>
+      </form>
+      <p class="fine-print">Support requests are encrypted at rest and deleted after 30 days or earlier when no longer needed.</p>
+    </main>
+    <footer class="shell footer">
+      <span>© {{YEAR}} {{APP_NAME}}</span>
+      <span class="footer-links"><a href="/">Home</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a></span>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,22 @@
+{
+  "name": "marketplace-helper-app",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "NODE_ENV=development node --watch src/server.js",
+    "check": "node --check src/pages.js && node --check src/server.js && node --check src/mcp.js && node --check src/oauth-broker.js && node --check src/local-db.js && node --check src/usage-audit.js",
+    "test": "node --test",
+    "usage:report": "node scripts/usage-report.js",
+    "security:audit": "npm audit --omit=dev --audit-level=moderate"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "better-sqlite3": "^11.10.0",
+    "express": "^4.19.2"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

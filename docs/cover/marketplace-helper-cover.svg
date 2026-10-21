@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1824" height="176" viewBox="0 0 1824 176" role="img" aria-labelledby="title desc">
+  <title id="title">Marketplace Helper cover image</title>
+  <desc id="desc">An abstract blue network and marketplace cover image with minimal text-free composition.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#07182b"/>
+      <stop offset=".45" stop-color="#0b3d91"/>
+      <stop offset="1" stop-color="#0b5cff"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#2d8cff" stop-opacity="0"/>
+      <stop offset=".6" stop-color="#2d8cff" stop-opacity=".42"/>
+      <stop offset="1" stop-color="#8ed0ff" stop-opacity=".8"/>
+    </linearGradient>
+    <filter id="soft" x="-20%" y="-40%" width="140%" height="180%">
+      <feGaussianBlur stdDeviation="18"/>
+    </filter>
+    <filter id="shadow" x="-20%" y="-40%" width="140%" height="180%">
+      <feDropShadow dx="0" dy="8" stdDeviation="7" flood-color="#031127" flood-opacity=".35"/>
+    </filter>
+  </defs>
+  <rect width="1824" height="176" fill="url(#background)"/>
+  <ellipse cx="1495" cy="58" rx="355" ry="165" fill="#2d8cff" opacity=".22" filter="url(#soft)"/>
+  <ellipse cx="1790" cy="174" rx="260" ry="135" fill="#67c6ff" opacity=".16" filter="url(#soft)"/>
+
+  <path d="M390 178 C626 112 698 17 892 78 S1121 207 1309 106 S1556 15 1853 58" fill="none" stroke="#55baff" stroke-width="2" opacity=".36"/>
+  <path d="M500 194 C701 155 827 34 1001 77 S1219 186 1398 111 S1626 58 1845 92" fill="none" stroke="url(#glow)" stroke-width="4" opacity=".85"/>
+  <path d="M741 184 C845 125 903 87 1004 101 S1168 167 1277 130 S1450 49 1610 65" fill="none" stroke="#ffffff" stroke-width="1.5" opacity=".28"/>
+
+  <g opacity=".6">
+    <circle cx="521" cy="142" r="4" fill="#8ed0ff"/>
+    <circle cx="694" cy="61" r="5" fill="#ffffff"/>
+    <circle cx="884" cy="77" r="4" fill="#f4a340"/>
+    <circle cx="1008" cy="101" r="5" fill="#8ed0ff"/>
+    <circle cx="1205" cy="153" r="4" fill="#ffffff"/>
+    <circle cx="1395" cy="111" r="5" fill="#f4a340"/>
+    <circle cx="1610" cy="65" r="4" fill="#8ed0ff"/>
+    <circle cx="1745" cy="84" r="5" fill="#ffffff"/>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="1178" y="27" width="194" height="120" rx="19" fill="#ffffff" opacity=".95"/>
+    <rect x="1202" y="49" width="92" height="8" rx="4" fill="#b8cdeb"/>
+    <rect x="1202" y="67" width="145" height="7" rx="3.5" fill="#d5e2f4"/>
+    <path d="M1204 120 L1241 84 L1280 112 L1320 73 L1348 96" fill="none" stroke="#0b5cff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="1204" cy="120" r="7" fill="#f4a340"/>
+    <circle cx="1241" cy="84" r="7" fill="#0b5cff"/>
+    <circle cx="1280" cy="112" r="7" fill="#2d8cff"/>
+    <circle cx="1320" cy="73" r="7" fill="#16855b"/>
+    <circle cx="1348" cy="96" r="7" fill="#f4a340"/>
+  </g>
+
+  <g opacity=".32">
+    <rect x="1452" y="34" width="132" height="82" rx="16" fill="#ffffff"/>
+    <rect x="1470" y="53" width="77" height="7" rx="3.5" fill="#0b5cff"/>
+    <rect x="1470" y="70" width="95" height="6" rx="3" fill="#ffffff"/>
+    <rect x="1470" y="87" width="62" height="6" rx="3" fill="#ffffff"/>
+  </g>
+
+  <circle cx="1662" cy="139" r="12" fill="#f4a340" opacity=".9"/>
+  <circle cx="1764" cy="43" r="10" fill="#8ed0ff" opacity=".85"/>
+</svg>

@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Security | {{APP_NAME}}</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <header class="shell nav">
+      <a class="brand" href="/"><span class="mark"><span>{{APP_INITIALS}}</span></span><span class="brand-copy"><strong>{{APP_NAME}}</strong></span></a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
+        <a href="/support">Support</a>
+      </nav>
+    </header>
+    <main class="shell content">
+      <h1>Security Overview</h1>
+      <p>
+        {{APP_NAME}} is a server-side OAuth and MCP integration. Raw Zoom OAuth tokens remain on the server;
+        Marketplace API results are returned only to authenticated MCP clients or API-key-protected REST callers.
+      </p>
+      <h2>Access Control</h2>
+      <p>
+        The MCP endpoint requires helper-issued OAuth bearer tokens and uses PKCE during authorization. The separate
+        administrative REST wrapper requires a server-side API key. Zoom account access requires OAuth authorization
+        from an eligible Zoom account admin.
+      </p>
+      <h2>Data Handling</h2>
+      <p>
+        The app stores Zoom OAuth access and refresh tokens, account identifiers, granted scopes, and limited
+        integration metadata in a private SQLite database so it can call Zoom Marketplace APIs for the authorizing
+        account. The database is outside the web root, is written with owner-only <code>0600</code> permissions, and
+        its application state is encrypted with AES-256-GCM. The underlying storage is also encrypted. The
+        application encryption key is supplied through deployment secrets.
+      </p>
+      <h2>Secrets</h2>
+      <p>
+        Do not commit client secrets, refresh tokens, signing secrets, verification tokens, or webhook secret tokens. Use local environment configuration or a production secret manager.
+      </p>
+      <h2>Deauthorization</h2>
+      <p>
+        Zoom deauthorization notifications are accepted only when the <code>x-zm-signature</code> HMAC matches the
+        configured webhook Secret Token and the request timestamp is recent. A verified event removes the affected
+        account's installation and all associated helper OAuth grants.
+      </p>
+      <h2>Report a Security Issue</h2>
+      <p>Report security issues through the <a href="/support">support form</a>. Do not include account identifiers, secrets, or tokens in your report.</p>
+    </main>
+    <footer class="shell footer">
+      <span>© {{YEAR}} {{APP_NAME}}</span>
+      <span class="footer-links"><a href="/">Home</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a></span>
+    </footer>
+  </body>
+</html>

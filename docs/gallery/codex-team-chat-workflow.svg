@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="780" viewBox="0 0 1200 780" role="img" aria-labelledby="title desc">
+  <title id="title">Codex macOS Terminal Team Chat workflow</title>
+  <desc id="desc">A macOS Terminal style Codex session using Marketplace Helper to create a Team Chat app.</desc>
+  <defs>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#111827" flood-opacity=".3"/>
+    </filter>
+  </defs>
+  <rect width="1200" height="780" fill="#e8edf2"/>
+  <rect x="48" y="36" width="1104" height="708" rx="13" fill="#0b1220" filter="url(#shadow)"/>
+  <rect x="48" y="36" width="1104" height="56" rx="13" fill="#f3f4f6"/>
+  <path d="M48 78 H1152 V92 H48 Z" fill="#f3f4f6"/>
+  <circle cx="76" cy="64" r="8" fill="#ff5f57"/>
+  <circle cx="102" cy="64" r="8" fill="#febc2e"/>
+  <circle cx="128" cy="64" r="8" fill="#28c840"/>
+  <text x="600" y="70" text-anchor="middle" fill="#374151" font-family="Arial, Helvetica, sans-serif" font-size="16">user - zsh - 120x36</text>
+
+  <text x="82" y="132" fill="#7b8794" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="14">Last login: Wed Jul 30 10:33:18 on ttys002</text>
+  <text x="82" y="169" fill="#9fc5ff" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="15">user@MacBook-Pro ~ %</text>
+  <text x="292" y="169" fill="#f3f4f6" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="15">codex</text>
+  <text x="82" y="204" fill="#7cb5ff" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="14">Codex</text>
+  <text x="162" y="204" fill="#94a3b8" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="14">MCP server connected: zoom-marketplace-helper</text>
+  <text x="82" y="240" fill="#9fc5ff" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="14">You</text>
+  <text x="138" y="240" fill="#f3f4f6" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="15">I want to create a marketplace app which helps me</text>
+  <text x="138" y="267" fill="#f3f4f6" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="15">create teams chat app</text>
+  <text x="82" y="306" fill="#7cb5ff" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="14">Codex</text>
+  <text x="150" y="306" fill="#d1d5db" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="14">I will prepare a Team Chat app draft and call the MCP tool.</text>
+
+  <rect x="82" y="334" width="1016" height="176" rx="8" fill="#08111f" stroke="#334155"/>
+  <text x="104" y="365" fill="#9fc5ff" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="14">[tool] marketplace_create_app</text>
+  <text x="104" y="397" fill="#94a3b8" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="13">app_type</text>
+  <text x="300" y="397" fill="#f3f4f6" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="13">general</text>
+  <text x="104" y="423" fill="#94a3b8" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="13">app_name</text>
+  <text x="300" y="423" fill="#b9dcff" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="13">Team Chat Helper</text>
+  <text x="104" y="449" fill="#94a3b8" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="13">products</text>
+  <text x="300" y="449" fill="#86efac" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="13">ZOOM_CHAT</text>
+  <text x="104" y="475" fill="#94a3b8" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="13">usage</text>
+  <text x="300" y="475" fill="#86efac" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="13">ADMIN_MANAGEMENT</text>
+
+  <text x="82" y="551" fill="#9fc5ff" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="14">Marketplace Helper</text>
+  <text x="82" y="582" fill="#86efac" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="15">OK  Draft Team Chat app created</text>
+  <text x="82" y="611" fill="#94a3b8" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="13">Next: configure Team Chat Subscription and bot endpoint.</text>
+  <text x="82" y="640" fill="#64748b" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="13">Credentials returned securely; raw secrets are not shown in the terminal.</text>
+  <text x="82" y="690" fill="#9fc5ff" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="15">user@MacBook-Pro ~ %</text>
+  <rect x="292" y="677" width="9" height="20" fill="#9fc5ff"/>
+</svg>

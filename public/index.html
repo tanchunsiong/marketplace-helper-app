@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{APP_NAME}} | Zoom app operations</title>
+    <meta name="description" content="An OAuth-backed MCP service for authorized Zoom account admins to create, inspect, validate, and manage Marketplace apps from compatible coding clients.">
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body class="home-page">
+    <header class="shell nav">
+      <a class="brand" href="/" aria-label="{{APP_NAME}} home">
+        <span class="mark"><span>{{APP_INITIALS}}</span></span>
+        <span class="brand-copy"><strong>{{APP_NAME}}</strong></span>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#capabilities">How it helps</a>
+        <a href="#workflow">Workflow</a>
+        <a href="/docs">Docs</a>
+      </nav>
+      <a class="nav-cta" href="/docs">Get started <span aria-hidden="true">↗</span></a>
+    </header>
+
+    <main>
+      <section class="shell hero">
+        <div class="hero-copy">
+          <div class="eyebrow"><span class="eyebrow-dot"></span> Marketplace tools for coding agents</div>
+          <h1>Build Zoom Marketplace apps from your <em>coding client</em></h1>
+          <p class="lead">
+            Connect Codex or Claude Code to your authorized Zoom account. Describe the app you need, then let your
+            agent prepare, validate, and apply the Marketplace configuration.
+          </p>
+          <div class="actions">
+            <a class="button primary" href="/docs">Read the setup guide <span aria-hidden="true">↗</span></a>
+            <a class="text-link" href="#workflow">See the workflow <span aria-hidden="true">↓</span></a>
+          </div>
+          <div class="hero-note"><span class="lock-icon" aria-hidden="true">◆</span> Admin authorization required</div>
+        </div>
+
+      </section>
+
+      <section class="trust-strip">
+        <div class="shell trust-inner">
+          <span class="trust-kicker">From your coding client</span>
+          <span>Describe</span><i></i><span>Configure</span><i></i><span>Validate</span><i></i><span>Apply</span>
+        </div>
+      </section>
+
+      <section class="shell section-block" id="capabilities">
+        <div class="section-intro">
+          <div><span class="section-index">01 / HOW IT HELPS</span><h2>Turn an app idea into a Marketplace configuration.</h2></div>
+          <p>The Zoom plugin supplies product guidance. The MCP service performs the authorized Marketplace operations.</p>
+        </div>
+        <div class="capability-grid">
+          <article class="capability-card card-create">
+            <div class="card-number">01</div><div class="card-symbol">＋</div>
+            <h3>Start with intent</h3>
+            <p>Describe the integration. Your agent gathers the app type, products, URLs, scopes, and features it needs.</p>
+            <span class="card-arrow">↗</span>
+          </article>
+          <article class="capability-card card-inspect">
+            <div class="card-number">02</div><div class="card-symbol">⌕</div>
+            <h3>Build through MCP</h3>
+            <p>Your agent prepares and validates the configuration, then creates a General or Server-to-Server OAuth app.</p>
+            <span class="card-arrow">↗</span>
+          </article>
+          <article class="capability-card card-operate">
+            <div class="card-number">03</div><div class="card-symbol">↻</div>
+            <h3>Continue in context</h3>
+            <p>Inspect, export, update, or delete the app without leaving your coding client.</p>
+            <span class="card-arrow">↗</span>
+          </article>
+        </div>
+      </section>
+
+      <section class="shell section-block workflow-section" id="workflow">
+        <div class="section-intro workflow-intro">
+          <div><span class="section-index">02 / THE WORKFLOW</span><h2>From authorization to a direct build flow.</h2></div>
+          <p>Connect once, describe the app, validate the configuration, and confirm the operation before it runs.</p>
+        </div>
+        <div class="workflow-line">
+          <div class="workflow-step"><span>01</span><h3>Connect</h3><p>Add the MCP server and complete Zoom OAuth with an eligible admin account.</p></div>
+          <div class="workflow-step"><span>02</span><h3>Describe</h3><p>Tell your coding agent what the app should do and where it should work.</p></div>
+          <div class="workflow-step"><span>03</span><h3>Validate</h3><p>Review the generated settings and validate the complete configuration.</p></div>
+          <div class="workflow-step"><span>04</span><h3>Apply</h3><p>Confirm the operation, then create, update, inspect, or delete the app.</p></div>
+        </div>
+      </section>
+
+      <section class="shell closing-banner">
+          <div><span class="section-index">START BUILDING</span><h2>Create and manage Zoom Marketplace apps from your coding client.</h2></div>
+        <a class="button light" href="/docs">Read the setup guide <span aria-hidden="true">↗</span></a>
+      </section>
+    </main>
+
+    <footer class="shell footer">
+      <div class="footer-brand"><span class="mark small-mark"><span>{{APP_INITIALS}}</span></span><span>{{APP_NAME}}</span></div>
+      <span>© {{YEAR}} {{APP_NAME}}</span>
+      <span class="footer-links">
+        <a href="/docs">Docs</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/security">Security</a><a href="/support">Support</a>
+      </span>
+    </footer>
+  </body>
+</html>

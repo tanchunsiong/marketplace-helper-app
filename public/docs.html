@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Documentation | {{APP_NAME}}</title>
+    <meta name="description" content="Documentation for connecting Codex, Claude Code, and other MCP clients to {{APP_NAME}}.">
+    <link rel="stylesheet" href="/styles.css">
+    <script src="/runtime-config.js" defer></script>
+  </head>
+  <body>
+    <header class="shell nav">
+      <a class="brand" href="/" aria-label="{{APP_NAME}} home">
+        <span class="mark"><span>{{APP_INITIALS}}</span></span>
+        <span class="brand-copy"><strong>{{APP_NAME}}</strong></span>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="/">Home</a>
+        <a href="/support">Support</a>
+        <a href="/privacy">Privacy</a>
+      </nav>
+      <a class="nav-cta" href="#quickstart-title">Get started <span aria-hidden="true">↓</span></a>
+    </header>
+
+    <main class="shell content">
+      <span class="section-index">DOCUMENTATION / GETTING STARTED</span>
+      <h1>Build and manage Zoom Marketplace apps from your coding client.</h1>
+      <p>
+        {{APP_NAME}} is an OAuth-powered MCP service for Codex, Claude Code, and other compatible AI coding
+        clients. It helps authorized Zoom account administrators inspect and manage Marketplace app configurations.
+      </p>
+
+      <section class="guide-intro" aria-labelledby="quickstart-title">
+        <span class="guide-kicker">PLUGIN + MCP QUICKSTART</span>
+        <h2 id="quickstart-title">Sideload the Zoom plugin, then connect {{APP_NAME}}.</h2>
+        <p>
+          The Zoom plugin supplies product knowledge and app-building workflows. {{APP_NAME}} supplies the
+          authenticated tools that read, create, validate, update, and delete apps in the authorized Zoom account.
+          Use the repository built for your coding client; the two packages are not interchangeable.
+        </p>
+      </section>
+
+      <h2>Prerequisites</h2>
+      <ul>
+        <li>A Zoom account with permission to create and manage Marketplace apps</li>
+        <li>Zoom for Developers view and edit permissions where required by the account</li>
+        <li>Git and either Codex CLI or Claude Code installed</li>
+        <li>A browser available to complete Zoom authorization</li>
+        <li>Permission to sideload a local plugin and configure an MCP server</li>
+      </ul>
+      <p>
+        No paid Zoom plan is required for the basic General App workflow. Individual Zoom products and app features
+        may require additional licenses or account permissions.
+      </p>
+
+      <div class="client-grid">
+        <article class="client-card">
+          <div class="client-card-head">
+            <span class="client-badge">CODEX</span>
+            <a href="https://github.com/zoom/zoom-plugin-codex">zoom/zoom-plugin-codex</a>
+          </div>
+          <ol class="setup-steps">
+            <li>
+              <strong>Clone the Codex plugin locally.</strong>
+              <pre><code>git clone https://github.com/zoom/zoom-plugin-codex.git \
+  "$HOME/zoom-plugin-codex"</code></pre>
+            </li>
+            <li>
+              <strong>Register the cloned directory as a local marketplace.</strong>
+              <pre><code>codex plugin marketplace add \
+  "$HOME/zoom-plugin-codex"</code></pre>
+            </li>
+            <li>
+              <strong>Install the locally sideloaded Zoom plugin.</strong>
+              <pre><code>codex plugin add zoom@zoom-local</code></pre>
+            </li>
+            <li>
+              <strong>Add {{APP_NAME}} as a remote MCP server.</strong>
+              <pre><code>codex mcp add zoom-marketplace-helper \
+  --url <span data-runtime-config="mcp_endpoint">https://your-host.example/mcp</span> \
+  --oauth-resource <span data-runtime-config="mcp_endpoint">https://your-host.example/mcp</span></code></pre>
+            </li>
+            <li>
+              <strong>Start OAuth and request the helper scopes.</strong>
+              <pre><code>codex mcp login zoom-marketplace-helper \
+  --scopes marketplace:read,marketplace:write,offline_access</code></pre>
+            </li>
+          </ol>
+          <p class="client-note">This is a local sideload. Start a new Codex session after installation so plugin skills and commands reload.</p>
+        </article>
+
+        <article class="client-card">
+          <div class="client-card-head">
+            <span class="client-badge claude-badge">CLAUDE CODE</span>
+            <a href="https://github.com/zoom/zoom-plugin">zoom/zoom-plugin</a>
+          </div>
+          <ol class="setup-steps">
+            <li>
+              <strong>Clone the Claude plugin locally for sideloading.</strong>
+              <pre><code>git clone https://github.com/zoom/zoom-plugin.git \
+  "$HOME/zoom-plugin"</code></pre>
+            </li>
+            <li>
+              <strong>Add {{APP_NAME}} to Claude Code.</strong>
+              <pre><code>claude mcp add --transport http --scope user \
+  zoom-marketplace-helper \
+  <span data-runtime-config="mcp_endpoint">https://your-host.example/mcp</span></code></pre>
+            </li>
+            <li>
+              <strong>Sideload the plugin when launching Claude Code.</strong>
+              <pre><code>claude --plugin-dir "$HOME/zoom-plugin"</code></pre>
+            </li>
+            <li>
+              <strong>Approve the MCP connection and complete OAuth when Claude prompts.</strong>
+              <p>Use <code>/mcp</code> inside Claude Code if the authorization prompt does not open automatically.</p>
+            </li>
+          </ol>
+          <p class="client-note">This loads the plugin for that Claude session only. Repeat <code>--plugin-dir</code> when starting another session.</p>
+        </article>
+      </div>
+
+      <div class="callout">
+        <strong>Before installing</strong>
+        <p>
+          These instructions intentionally use local sideloading rather than a published plugin catalog. Review each
+          repository and its permissions, and run the commands only in an environment where you trust the source.
+        </p>
+      </div>
+
+      <h2>What happens during OAuth</h2>
+      <ol class="oauth-flow">
+        <li><span>01</span><div><strong>Your coding client contacts {{APP_NAME}}.</strong><p>Codex or Claude connects to <code data-runtime-config="mcp_endpoint">Loading service URL…</code> and reads its OAuth discovery metadata.</p></div></li>
+        <li><span>02</span><div><strong>{{APP_NAME}} starts authorization.</strong><p>The service opens its authorization route and securely tracks the client callback, PKCE challenge, requested scopes, and state.</p></div></li>
+        <li><span>03</span><div><strong>Your browser is redirected to Zoom.</strong><p>Zoom authorization uses the registered production callback shown below.</p></div></li>
+        <li><span>04</span><div><strong>Zoom returns to {{APP_NAME}}.</strong><p>The service exchanges Zoom's code server-side, encrypts the Zoom token set, and redirects an MCP authorization code to the temporary loopback callback opened by Codex or Claude.</p></div></li>
+        <li><span>05</span><div><strong>The MCP tools become available.</strong><p>The plugin's skill selects the app model and manifest while {{APP_NAME}} performs the authorized Marketplace operations.</p></div></li>
+      </ol>
+
+      <pre class="oauth-url"><code data-runtime-config="oauth_authorize_url">https://zoom.us/oauth/authorize?response_type=code&amp;client_id=YOUR_CLIENT_ID&amp;redirect_uri=https://your-host.example/oauth/callback</code></pre>
+      <p class="fine-print">
+        Do not configure the Zoom callback above as the coding client's MCP callback. {{APP_NAME}} owns that
+        callback; Codex and Claude use their temporary localhost callback automatically.
+      </p>
+
+      <h2>Try your first request</h2>
+      <p>Start with a clear app goal and ask the plugin to gather any missing settings before making changes:</p>
+      <blockquote class="prompt-example">
+        I want to create a Zoom Marketplace app for a Team Chat integration. Ask me for any required choices, build and
+        validate the manifest, then create the app and return its app ID.
+      </blockquote>
+
+      <h2>Use the Marketplace tools</h2>
+      <h3>List and inspect apps</h3>
+      <p>
+        Ask the agent to list the Marketplace apps accessible to the account, then provide an app ID to retrieve its
+        metadata or export its manifest. Unpublished developer drafts may be absent from list results, so use the exact
+        app ID returned when the draft was created.
+      </p>
+      <h3>Create an app</h3>
+      <p>
+        Ask the agent to create a General App or Server-to-Server OAuth app and provide its intended authorization
+        level, Zoom products, HTTPS URLs, scopes, and features. General App manifests are validated before creation.
+        Meeting SDK is configured as a capability of a General App rather than as a standalone app type.
+      </p>
+      <h3>Update an app</h3>
+      <ol>
+        <li>Export the current manifest using the exact app ID.</li>
+        <li>Change only the intended settings.</li>
+        <li>Validate the complete replacement manifest with the app ID.</li>
+        <li>Apply the update and export the manifest again to verify the result.</li>
+      </ol>
+      <p>Manifest updates replace the complete configuration, so exporting first prevents unrelated fields from being omitted.</p>
+      <h3>Delete an app</h3>
+      <p>
+        Provide the exact app ID and explicitly confirm deletion. The helper deletes the app and verifies that Zoom no
+        longer returns it. Deleting an app is permanent and is separate from removing {{APP_NAME}} from the
+        Zoom account.
+      </p>
+
+      <h2>Connection reference</h2>
+      <p>The remote MCP endpoint and OAuth discovery documents are:</p>
+      <ul class="endpoint-list">
+        <li><code data-runtime-config="mcp_endpoint">Loading service URL…</code></li>
+        <li><code data-runtime-config="mcp_protected_resource">Loading protected-resource metadata URL…</code></li>
+        <li><code data-runtime-config="mcp_authorization_server">Loading authorization-server metadata URL…</code></li>
+      </ul>
+
+      <h2>Authorization</h2>
+      <p>
+        The MCP client starts an OAuth authorization flow. You authorize the Zoom account in the browser, and the
+        helper stores the Zoom token in an encrypted local SQLite database. The raw Zoom access token is not returned
+        in the browser callback.
+      </p>
+      <p>The helper MCP scopes are:</p>
+      <ul>
+        <li><code>marketplace:read</code> for read-only Marketplace operations</li>
+        <li><code>marketplace:write</code> for create, update, and delete operations</li>
+        <li><code>offline_access</code> for refresh-token support</li>
+      </ul>
+
+      <h2>Available tools</h2>
+      <ul>
+        <li>List apps exposed by Zoom's account-level Marketplace endpoint; unpublished developer drafts may be absent</li>
+        <li>Create General and Server-to-Server OAuth apps</li>
+        <li>Configure Meeting SDK as a capability of a General App</li>
+        <li>Read app metadata and export normalized manifests for app types supported by Zoom's manifest API</li>
+        <li>Validate and replace complete General App manifests</li>
+        <li>Delete apps by exact app ID</li>
+      </ul>
+
+      <h2>Important workflows</h2>
+      <p>
+        Validate a General App manifest before creating or replacing it. Export the current manifest before updating
+        so fields that should remain unchanged are preserved.
+      </p>
+      <p>
+        Marketplace list results may not include unpublished developer drafts. Keep the exact <code>app_id</code>
+        returned by creation for later reads, updates, or deletion.
+      </p>
+
+      <h2 id="remove-app">Remove {{APP_NAME}}</h2>
+      <p>To revoke the integration from your Zoom account:</p>
+      <ol class="setup-steps">
+        <li>Sign in to the <a href="https://marketplace.zoom.us/">Zoom App Marketplace</a>.</li>
+        <li>In the upper-right corner, select <strong>Manage</strong>.</li>
+        <li>In the left navigation, select <strong>Added Apps</strong>.</li>
+        <li>Find and select <strong>{{APP_NAME}}</strong>.</li>
+        <li>Select <strong>Remove</strong>, optionally provide a reason, and confirm removal.</li>
+      </ol>
+      <p>
+        Removal revokes the integration's access to your Zoom account, so existing Codex and Claude MCP sessions can
+        no longer perform Marketplace operations. Marketplace apps previously created or updated through the helper
+        remain in your Zoom account and are not deleted automatically.
+      </p>
+      <p>
+        After Zoom confirms removal, the service deletes and no longer retains the matching installation record,
+        encrypted Zoom access and refresh tokens, helper MCP access and refresh tokens, and pending authorization
+        codes. Once cleanup completes, the service has no active credentials for the removed connection and can no
+        longer access the Zoom account. These records are not kept for analytics, advertising, profiling, or future
+        reuse, and Marketplace API responses are not retained in a separate content or analytics database.
+      </p>
+      <p>Optionally remove the now-unusable MCP server registration from your coding client:</p>
+      <pre><code># Codex
+codex mcp remove zoom-marketplace-helper
+
+# Claude Code
+claude mcp remove --scope user zoom-marketplace-helper</code></pre>
+      <p class="fine-print">
+        Removing the MCP registration or sideloaded plugin alone does not revoke Zoom authorization. Complete the
+        Zoom App Marketplace removal steps above to disconnect the account and trigger server-side cleanup.
+      </p>
+
+      <h2 id="troubleshooting">Troubleshooting</h2>
+      <h3>OAuth does not open</h3>
+      <p>Run the MCP login command again. In Claude Code, use <code>/mcp</code> and select the server to begin authorization.</p>
+      <h3>Authorization is rejected</h3>
+      <p>Confirm that the Zoom user can manage Marketplace apps and that the requested permissions were approved.</p>
+      <h3>MCP tools are missing</h3>
+      <p>Restart the coding client after sideloading, then confirm that <code>zoom-marketplace-helper</code> is in its MCP server list.</p>
+      <h3>A draft is absent from list results</h3>
+      <p>Use the exact app ID returned during creation; Zoom may omit developer-owned unpublished drafts from list results.</p>
+      <h3>Manifest validation returns <code>ok:false</code></h3>
+      <p>Correct the referenced field-level errors and validate again. An HTTP success response does not mean the manifest is valid.</p>
+      <h3>The connection stopped after removal</h3>
+      <p>Add the MCP server again and complete Zoom OAuth to establish a new authorized connection.</p>
+
+      <h2>Data protection</h2>
+      <p>
+        The service stores OAuth access and refresh tokens, account identifiers, granted scopes, and limited integration
+        metadata in a private SQLite database on the application host. The application state is encrypted with AES-256-GCM,
+        the database file is restricted to the service account, and the underlying storage is encrypted. Raw Zoom
+        OAuth tokens are not returned to MCP clients, browsers, or application logs.
+      </p>
+
+      <h2>Architecture diagram</h2>
+      <p>
+        These files describe the deployed service architecture, OAuth sequence, Marketplace management flow, and
+        current security and storage boundaries.
+      </p>
+      <ul>
+        <li><a href="/architecture/marketplace-helper-architecture.pdf">Download the PDF architecture diagram</a></li>
+        <li><a href="/architecture/marketplace-helper-architecture.png">View the PNG architecture diagram</a></li>
+      </ul>
+
+      <h2>Support</h2>
+      <p>
+        For installation, authorization, removal, or Marketplace configuration help, submit the
+        <a href="/support">support request form</a>. Do not include OAuth tokens, client secrets, signing secrets, or
+        other credentials in a request.
+      </p>
+      <p><a class="button primary" href="/support">Open support form <span aria-hidden="true">↗</span></a></p>
+    </main>
+
+    <footer class="shell footer">
+      <div class="footer-brand"><span class="mark small-mark"><span>{{APP_INITIALS}}</span></span><span>{{APP_NAME}}</span></div>
+      <span>© {{YEAR}} {{APP_NAME}}</span>
+      <span class="footer-links"><a href="/">Home</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/support">Support</a></span>
+    </footer>
+  </body>
+</html>

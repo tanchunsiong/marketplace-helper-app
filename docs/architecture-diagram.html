@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Marketplace Helper App - Architecture Diagram</title>
+  <style>
+    @page { size: 16in 12in; margin: 0; }
+    :root {
+      --navy: #102a43;
+      --ink: #243b53;
+      --muted: #627d98;
+      --blue: #0b5cff;
+      --blue-dark: #0747c7;
+      --blue-pale: #edf4ff;
+      --cyan-pale: #e8f7ff;
+      --green: #16855b;
+      --green-pale: #eaf8f1;
+      --amber: #a15c00;
+      --amber-pale: #fff4df;
+      --line: #cfdae8;
+      --panel: #f7faff;
+      --white: #ffffff;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; width: 1600px; height: 1200px; }
+    body {
+      color: var(--ink);
+      background: #eef4fa;
+      font-family: Arial, Helvetica, sans-serif;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .page {
+      width: 1600px;
+      height: 1200px;
+      padding: 46px 54px 40px;
+      background: linear-gradient(145deg, #ffffff 0%, #f7faff 58%, #edf5ff 100%);
+      overflow: hidden;
+    }
+    .eyebrow {
+      margin: 0 0 9px;
+      color: var(--blue);
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    h1 {
+      margin: 0;
+      color: var(--navy);
+      font-size: 42px;
+      line-height: 1.05;
+      letter-spacing: -1px;
+    }
+    .subtitle {
+      margin: 12px 0 23px;
+      color: var(--muted);
+      font-size: 19px;
+      line-height: 1.4;
+    }
+    .rule { height: 4px; width: 100%; margin-bottom: 17px; background: var(--blue); border-radius: 4px; }
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      margin: 0 0 9px;
+      color: var(--navy);
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+    }
+    .section-title span {
+      display: inline-flex;
+      width: 27px;
+      height: 27px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      color: var(--white);
+      background: var(--blue);
+      font-size: 14px;
+    }
+    .architecture {
+      height: 386px;
+      padding: 16px 16px 13px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255,255,255,.78);
+      box-shadow: 0 12px 34px rgba(16, 42, 67, .08);
+    }
+    svg { display: block; width: 100%; height: 100%; }
+    .svg-label { fill: var(--navy); font-size: 18px; font-weight: 700; }
+    .svg-small { fill: var(--muted); font-size: 13px; }
+    .svg-mono { fill: var(--blue-dark); font-family: monospace; font-size: 12px; }
+    .node { stroke-width: 2; }
+    .node-client { fill: var(--blue-pale); stroke: #a8c5f5; }
+    .node-gateway { fill: var(--cyan-pale); stroke: #9dd4eb; }
+    .node-core { fill: #eaf0ff; stroke: #abc1fa; }
+    .node-data { fill: var(--amber-pale); stroke: #e5c68f; }
+    .node-zoom { fill: var(--green-pale); stroke: #a5d8bd; }
+    .arrow { stroke: #7895b2; stroke-width: 2.3; fill: none; }
+    .arrow-blue { stroke: var(--blue); stroke-width: 2.5; fill: none; }
+    .arrow-label { fill: var(--muted); font-size: 12px; font-weight: 700; }
+    .flow-grid { display: grid; gap: 13px; margin-top: 10px; }
+    .flow-grid.auth { grid-template-columns: repeat(6, 1fr); }
+    .flow-grid.crud { grid-template-columns: repeat(5, 1fr); }
+    .flow-card {
+      position: relative;
+      min-height: 116px;
+      padding: 14px 14px 12px;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      background: var(--white);
+      box-shadow: 0 5px 18px rgba(16, 42, 67, .05);
+    }
+    .flow-card:not(:last-child)::after {
+      position: absolute;
+      content: '>';
+      top: 42px;
+      right: -12px;
+      z-index: 2;
+      color: var(--blue);
+      font-size: 24px;
+      font-weight: 700;
+    }
+    .flow-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 25px;
+      height: 25px;
+      margin-bottom: 8px;
+      border-radius: 8px;
+      color: var(--white);
+      background: var(--blue);
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .flow-card h3 { margin: 0 0 7px; color: var(--navy); font-size: 15px; line-height: 1.15; }
+    .flow-card p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.35; }
+    .flow-card code, .note code { color: var(--blue-dark); font-family: monospace; font-size: 11px; }
+    .lower { display: grid; grid-template-columns: 1.6fr 1fr; gap: 15px; margin-top: 17px; }
+    .panel {
+      min-height: 122px;
+      padding: 15px 17px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(255,255,255,.8);
+    }
+    .panel h2 { margin: 0 0 10px; color: var(--navy); font-size: 16px; }
+    .chip-row { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip {
+      padding: 7px 10px;
+      border: 1px solid #c7d7ea;
+      border-radius: 999px;
+      color: var(--ink);
+      background: var(--blue-pale);
+      font-size: 12px;
+      line-height: 1;
+    }
+    .chip.green { border-color: #b6ddc7; background: var(--green-pale); }
+    .chip.amber { border-color: #e4cb9d; background: var(--amber-pale); }
+    .note { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.45; }
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 16px;
+      padding-top: 10px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 11px;
+    }
+    .footer strong { color: var(--navy); }
+    @media print {
+      body { background: #ffffff; }
+      .page { box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <p class="eyebrow">Zoom Marketplace submission reference</p>
+    <h1>Marketplace Helper App</h1>
+    <p class="subtitle">Architecture diagram for MCP-based Zoom Marketplace app management, OAuth authorization, manifest operations, and support requests.</p>
+    <div class="rule"></div>
+
+    <div class="section-title"><span>1</span> System architecture</div>
+    <section class="architecture" aria-label="System architecture diagram">
+      <svg viewBox="0 0 1450 350" role="img" aria-label="MCP clients connect through a public HTTPS edge to an Nginx and Node.js service, which calls Zoom OAuth and Marketplace APIs">
+        <defs>
+          <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#7895b2"></path>
+          </marker>
+          <marker id="arrowBlue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#0b5cff"></path>
+          </marker>
+        </defs>
+
+        <rect class="node node-client" x="16" y="44" width="226" height="240" rx="16"></rect>
+        <text class="svg-label" x="38" y="78">MCP clients</text>
+        <text class="svg-small" x="38" y="102">Third-party client software</text>
+        <rect x="38" y="124" width="182" height="37" rx="9" fill="#ffffff" stroke="#c4d7f2"></rect>
+        <text class="svg-small" x="52" y="147">Codex</text>
+        <rect x="38" y="171" width="182" height="37" rx="9" fill="#ffffff" stroke="#c4d7f2"></rect>
+        <text class="svg-small" x="52" y="194">Claude Code</text>
+        <rect x="38" y="218" width="182" height="37" rx="9" fill="#ffffff" stroke="#c4d7f2"></rect>
+        <text class="svg-small" x="52" y="241">Other MCP clients</text>
+
+        <rect class="node node-gateway" x="285" y="92" width="208" height="142" rx="16"></rect>
+        <text class="svg-label" x="309" y="127">Public edge</text>
+        <text class="svg-small" x="309" y="153">HTTPS / TLS</text>
+        <text class="svg-mono" x="309" y="177">HTTPS / TLS</text>
+        <text class="svg-mono" x="309" y="198">your-host.example</text>
+
+        <rect class="node node-core" x="535" y="34" width="384" height="258" rx="16"></rect>
+        <text class="svg-label" x="561" y="70">Application host + helper service</text>
+        <text class="svg-small" x="561" y="94">Nginx → Node.js 20 + Express, managed by PM2</text>
+        <rect x="561" y="113" width="332" height="45" rx="10" fill="#ffffff" stroke="#b8c8ee"></rect>
+        <text class="svg-small" x="578" y="141">MCP Streamable HTTP endpoint</text>
+        <text class="svg-mono" x="848" y="141">/mcp</text>
+        <rect x="561" y="169" width="332" height="45" rx="10" fill="#ffffff" stroke="#b8c8ee"></rect>
+        <text class="svg-small" x="578" y="197">OAuth broker + PKCE + signed state</text>
+        <rect x="561" y="225" width="332" height="45" rx="10" fill="#ffffff" stroke="#b8c8ee"></rect>
+        <text class="svg-small" x="578" y="253">7 Marketplace MCP tools</text>
+
+        <rect class="node node-data" x="969" y="92" width="190" height="142" rx="16"></rect>
+        <text class="svg-label" x="993" y="127">Local state</text>
+        <text class="svg-small" x="993" y="153">Encrypted local SQLite</text>
+        <text class="svg-mono" x="993" y="179">private SQLite file</text>
+        <text class="svg-small" x="993" y="204">AES-256-GCM state,</text>
+        <text class="svg-small" x="993" y="222">OAuth records + support requests</text>
+
+        <rect class="node node-zoom" x="1210" y="28" width="220" height="120" rx="16"></rect>
+        <text class="svg-label" x="1234" y="63">Zoom OAuth</text>
+        <text class="svg-small" x="1234" y="89">Authorization + token</text>
+        <text class="svg-mono" x="1234" y="113">zoom.us/oauth/*</text>
+
+        <rect class="node node-zoom" x="1210" y="180" width="220" height="120" rx="16"></rect>
+        <text class="svg-label" x="1234" y="215">Zoom Marketplace</text>
+        <text class="svg-small" x="1234" y="241">REST API v2</text>
+        <text class="svg-mono" x="1234" y="265">api.zoom.us/v2/*</text>
+
+        <path class="arrow-blue" marker-end="url(#arrowBlue)" d="M 242 164 L 285 164"></path>
+        <text class="arrow-label" x="248" y="132">MCP / OAuth</text>
+        <path class="arrow-blue" marker-end="url(#arrowBlue)" d="M 493 164 L 535 164"></path>
+        <text class="arrow-label" x="497" y="132">HTTP origin</text>
+        <path class="arrow" marker-end="url(#arrow)" d="M 919 126 L 969 126"></path>
+        <path class="arrow" marker-end="url(#arrow)" d="M 919 238 L 969 198"></path>
+        <text class="arrow-label" x="925" y="111">read/write</text>
+        <path class="arrow-blue" marker-end="url(#arrowBlue)" d="M 919 126 C 1030 30 1094 54 1210 84"></path>
+        <text class="arrow-label" x="1007" y="59">OAuth browser flow</text>
+        <path class="arrow-blue" marker-end="url(#arrowBlue)" d="M 919 234 C 1040 316 1094 260 1210 240"></path>
+        <text class="arrow-label" x="1003" y="306">Bearer API calls</text>
+      </svg>
+    </section>
+
+    <div class="section-title" style="margin-top: 16px;"><span>2</span> Authorization flow</div>
+    <section class="flow-grid auth" aria-label="OAuth authorization flow">
+      <article class="flow-card"><div class="flow-number">1</div><h3>MCP client starts login</h3><p>Client discovers protected-resource metadata and opens the helper authorization endpoint with PKCE.</p></article>
+      <article class="flow-card"><div class="flow-number">2</div><h3>Helper creates state</h3><p>Signed state binds the MCP redirect, nonce, requested scopes, and PKCE challenge.</p></article>
+      <article class="flow-card"><div class="flow-number">3</div><h3>Zoom user consent</h3><p>Browser is redirected to Zoom OAuth. The user authorizes the Marketplace Helper app.</p></article>
+      <article class="flow-card"><div class="flow-number">4</div><h3>Callback and exchange</h3><p>Helper receives the Zoom code, exchanges it server-side, and stores the resulting token record.</p></article>
+      <article class="flow-card"><div class="flow-number">5</div><h3>Issue MCP tokens</h3><p>Helper returns a one-time authorization code, then MCP access and refresh tokens to the client.</p></article>
+      <article class="flow-card"><div class="flow-number">6</div><h3>Authenticated tools</h3><p>Client sends a bearer token to <code>/mcp</code>; the helper refreshes Zoom tokens when needed.</p></article>
+    </section>
+
+    <div class="section-title" style="margin-top: 16px;"><span>3</span> Marketplace management flow</div>
+    <section class="flow-grid crud" aria-label="Marketplace management flow">
+      <article class="flow-card"><div class="flow-number">A</div><h3>Tool request</h3><p>Client calls an MCP tool such as list, create, inspect, export, validate, update, or delete.</p></article>
+      <article class="flow-card"><div class="flow-number">B</div><h3>Manifest safety</h3><p>For updates, export the current manifest, change intended fields, validate the complete replacement.</p></article>
+      <article class="flow-card"><div class="flow-number">C</div><h3>Create by app type</h3><p>General and S2S apps use <code>/v2/marketplace/apps</code>. Meeting SDK is configured within a General App.</p></article>
+      <article class="flow-card"><div class="flow-number">D</div><h3>Zoom API response</h3><p>Helper preserves upstream status and error details, including validation responses with <code>ok:false</code>.</p></article>
+      <article class="flow-card"><div class="flow-number">E</div><h3>Verify destructive work</h3><p>After delete or update, read back the app or manifest to confirm the effective state.</p></article>
+    </section>
+
+    <section class="lower">
+      <div class="panel">
+        <h2>Security and deployment boundaries</h2>
+        <div class="chip-row">
+          <span class="chip green">TLS at public edge</span>
+          <span class="chip green">Nginx reverse proxy</span>
+          <span class="chip green">PKCE S256</span>
+          <span class="chip green">Signed OAuth state</span>
+          <span class="chip green">One-time codes</span>
+          <span class="chip green">Refresh-token rotation</span>
+          <span class="chip green">SQLite 0600</span>
+          <span class="chip green">AES-256-GCM at rest</span>
+          <span class="chip amber">Secrets from environment</span>
+        </div>
+      </div>
+      <div class="panel">
+        <h2>Current implementation scope</h2>
+        <p class="note">The deployed implementation uses a public HTTPS edge, Nginx, PM2, an AES-256-GCM encrypted local SQLite database, and outbound HTTPS calls to Zoom. It does not require PostgreSQL, Docker, RTMS, Zoom Apps SDK runtime, Meeting SDK runtime, AI providers, or another third-party database.</p>
+      </div>
+    </section>
+
+    <div class="footer"><span><strong>Marketplace Helper App</strong> | Architecture reference</span><span>No credentials or production secrets are shown</span></div>
+  </main>
+</body>
+</html>

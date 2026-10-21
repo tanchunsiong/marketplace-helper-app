@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Privacy Policy | {{APP_NAME}}</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <header class="shell nav">
+      <a class="brand" href="/"><span class="mark"><span>{{APP_INITIALS}}</span></span><span class="brand-copy"><strong>{{APP_NAME}}</strong></span></a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="/terms">Terms</a>
+        <a href="/security">Security</a>
+        <a href="/support">Support</a>
+      </nav>
+    </header>
+    <main class="shell content">
+      <h1>Privacy Policy</h1>
+      <p>Effective date: {{POLICY_EFFECTIVE_DATE}}.</p>
+      <p>
+        {{APP_NAME}} processes Zoom account and Marketplace app information only after an authorized Zoom account admin grants OAuth access.
+      </p>
+      <h2>Information We Process</h2>
+      <p>
+        The app may process OAuth tokens, Zoom account and user identifiers, granted scopes, Marketplace app metadata,
+        app manifests, redirect URLs, and webhook configuration needed to perform requested
+        operations. If you submit a support request, we process the name, email address, issue description, submission
+        time, and one-way abuse-prevention identifiers provided with that request.
+      </p>
+      <h2>How Information Is Used</h2>
+      <p>
+        Information is used to create, inspect, update, validate, or delete Zoom Marketplace app configurations for
+        the authorizing account. Marketplace API results are returned to the authorized MCP or REST client that
+        requested them. We do not sell personal data or use it for advertising.
+      </p>
+      <h2>Retention</h2>
+      <p>
+        Zoom authorization records are stored only while the integration remains authorized. When the app is removed
+        and Zoom confirms deauthorization, we delete the matching installation and associated Zoom and MCP credentials.
+        Marketplace API responses are processed for the requested operation and are not intentionally retained as a
+        separate analytics or content database. Support requests are retained for no more than 30 days, or deleted
+        earlier when they are no longer needed to address the request.
+      </p>
+      <h2>Security</h2>
+      <p>
+        We use technical and access controls designed to protect stored information. Sensitive records are encrypted
+        at rest, access is restricted to authorized service and administrative processes, and information is protected
+        in transit using HTTPS. Raw Zoom OAuth tokens are not written to application logs or returned to MCP clients or
+        browser callbacks.
+      </p>
+    </main>
+    <footer class="shell footer">
+      <span>© {{YEAR}} {{APP_NAME}}</span>
+      <span class="footer-links"><a href="/">Home</a><a href="/terms">Terms</a><a href="/support">Support</a></span>
+    </footer>
+  </body>
+</html>
